@@ -5,4 +5,4 @@ SELECT
     customer_zip_code_prefix,
     customer_city,
     customer_state
-FROM {{ source('olist_raw_data', 'olist_customers_dataset') }}
+FROM {{ source('olist_raw_data', 'customers') }}

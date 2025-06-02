@@ -8,4 +8,4 @@ SELECT
     order_delivered_carrier_date::timestamp_ntz AS order_delivered_carrier_date,
     order_delivered_customer_date::timestamp_ntz AS order_delivered_customer_date,
     order_estimated_delivery_date::timestamp_ntz AS order_estimated_delivery_date
-FROM {{ source('olist_raw_data', 'olist_orders_dataset') }}
+FROM {{ source('olist_raw_data', 'orders') }}
