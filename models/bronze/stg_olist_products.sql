@@ -5,7 +5,7 @@
 SELECT
     p.product_id,
     p.product_category_name,
-    COALESCE(t.c1, p.product_category_name) AS product_category_name_english, -- Handle missing translations
+    COALESCE(t.c2, p.product_category_name) AS product_category_name_english, -- Handle missing translations
     p.product_name_lenght AS product_name_length, -- Typo in source data
     p.product_description_lenght AS product_description_length, -- Typo in source data
     p.product_photos_qty,
