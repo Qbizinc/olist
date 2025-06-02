@@ -5,4 +5,4 @@ SELECT
     payment_type,
     payment_installments,
     payment_value::number(10,2) AS payment_value
-FROM {{ source('olist_raw_data', 'olist_order_payments_dataset') }}
+FROM {{ source('olist_raw_data', 'order_payments') }}
