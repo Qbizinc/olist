@@ -9,14 +9,14 @@
     --#}
 
     {%- set default_schema = target.schema -%}
-    {%- set env_name = target.name | lower -%}
+    {%- set env_name = env_var('DBT_ENVIRONMENT') | lower -%}
     
     {%- if custom_schema_name is none -%}
 
         {{ default_schema }}
 
     {%- else -%}
-        {%- if env_name == 'production' -%}
+        {%- if env_name == 'prod' -%}
             {{- custom_schema_name | trim -}}
         {%- else -%}
             {# default dbt behavior #}
