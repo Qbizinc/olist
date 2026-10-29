@@ -11,5 +11,5 @@ SELECT "PRODUCT_ID",
     "PRODUCT_LENGTH_CM",
     "PRODUCT_HEIGHT_CM",
     "PRODUCT_WIDTH_CM"
-FROM "DBT_JECK_BRONZE"."STG_OLIST_PRODUCTS" AS "dbt_jeck_bronze__stg_olist_products"
+FROM {{ ref('stg_olist_products') }} AS "dbt_jeck_bronze__stg_olist_products"
 GROUP BY 6, 2, 4, 9, 1, 8, 3, 5, 7, 10
