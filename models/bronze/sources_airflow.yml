@@ -1,0 +1,39 @@
+version: 2
+
+sources:
+  - name: olist_airflow
+    description: >
+      Tables landed in OLIST.BRONZE by Airflow (Qbizinc/sandbox-data-pipeline). Airflow owns
+      ingestion; dbt only reads them. Prefix AF_ marks them as Airflow-owned.
+    database: OLIST
+    schema: BRONZE
+    loaded_at_field: _loaded_at
+    tables:
+      - name: af_marketing_qualified_leads
+        identifier: AF_MARKETING_QUALIFIED_LEADS
+        description: >
+          Olist Marketing Funnel dataset: marketing qualified leads (MQLs) that asked to sell on
+          Olist, Jun 2017 - May 2018. Loaded by DAG olist_marketing_funnel_ingest.
+        freshness:
+          warn_after: {count: 14, period: day}
+        columns:
+          - name: mql_id
+            description: Marketing qualified lead id.
+      - name: af_closed_deals
+        identifier: AF_CLOSED_DEALS
+        description: >
+          Olist Marketing Funnel dataset: MQLs that signed up as sellers. seller_id joins the main
+          dataset's sellers and order items. Loaded by DAG olist_marketing_funnel_ingest.
+        freshness:
+          warn_after: {count: 14, period: day}
+        columns:
+          - name: mql_id
+          - name: seller_id
+      - name: af_fx_rates_brl
+        identifier: AF_FX_RATES_BRL
+        description: >
+          Daily BRL -> USD ECB reference rates (business days only), via frankfurter.dev.
+          Loaded by DAG olist_fx_rates_ingest.
+        freshness:
+          warn_after: {count: 3, period: day}
+          error_after: {count: 7, period: day}

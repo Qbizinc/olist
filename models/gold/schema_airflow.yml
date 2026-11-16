@@ -1,0 +1,24 @@
+version: 2
+
+models:
+  - name: seller_acquisition_funnel
+    description: >
+      Monthly MQL cohorts by origin: leads, closed deals, conversion rate, days to close, and the
+      orders and GMV (item price, BRL) of the sellers each cohort brought in.
+    columns:
+      - name: first_contact_month
+        tests: [not_null]
+      - name: origin
+        tests: [not_null]
+      - name: conversion_rate
+        description: closed_deals / mqls.
+  - name: monthly_sales_usd
+    description: >
+      Monthly item sales by product category in BRL and USD, converted at each purchase date's
+      rate. Item grain: PRICE_BRL is about 13.59M in total, against 14.12M in
+      MONTHLY_SALES_BY_PRODUCT_CATEGORY, which inherits FCT_ORDER_ITEMS' payment fan-out.
+    columns:
+      - name: order_purchase_month
+        tests: [not_null]
+      - name: price_usd
+        description: Item price converted to USD at the purchase date's rate.

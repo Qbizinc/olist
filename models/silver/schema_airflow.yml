@@ -1,0 +1,25 @@
+version: 2
+
+models:
+  - name: dim_marketing_lead
+    description: >
+      One row per marketing qualified lead, with its closed deal (seller, segment, days to close)
+      when the lead signed up. seller_id joins DIM_SELLERS and the order items.
+    columns:
+      - name: mql_id
+        tests: [unique, not_null]
+      - name: origin
+        description: Acquisition channel of the lead (organic_search, paid_search, social, ...).
+        tests: [not_null]
+      - name: is_closed
+        description: TRUE when the lead became a seller.
+        tests: [not_null]
+  - name: fct_fx_rate_daily
+    description: >
+      BRL -> USD rate for every calendar day. Weekends and holidays carry the last published ECB
+      rate forward.
+    columns:
+      - name: rate_date
+        tests: [unique, not_null]
+      - name: usd_per_brl
+        tests: [not_null]
