@@ -1,0 +1,30 @@
+version: 2
+
+models:
+  - name: stg_olist_marketing_qualified_leads
+    description: Marketing qualified leads landed by Airflow, one row per MQL.
+    columns:
+      - name: mql_id
+        tests: [unique, not_null]
+      - name: first_contact_date
+        tests: [not_null]
+  - name: stg_olist_closed_deals
+    description: Closed deals landed by Airflow, one row per MQL that became a seller.
+    columns:
+      - name: mql_id
+        tests:
+          - unique
+          - not_null
+          - relationships:
+              to: ref('stg_olist_marketing_qualified_leads')
+              field: mql_id
+      - name: seller_id
+        tests: [not_null]
+  - name: stg_fx_rates_brl
+    description: BRL -> USD ECB reference rates landed by Airflow, one row per business day.
+    columns:
+      - name: rate_date
+        tests: [unique, not_null]
+      - name: usd_per_brl
+        description: USD for one BRL.
+        tests: [not_null]
